@@ -16,7 +16,6 @@ class Driver:
     # end
 
     def classify(self, ticker):
-        numTweets = self.numTweets
         tweets = self.tweetScraper.get_ticker_tweets(ticker, self.daysBack, self.numTweets)
         predictions = {"bearish" : 0, "bullish" : 0, "neutral" : 0}
 
@@ -31,9 +30,9 @@ class Driver:
         maxLabel = ""
         maxPerc = 0
         for label, num in predictions.items():
-            if (num/numTweets) > maxPerc:
+            if (num/self.numTweets) > maxPerc:
                 maxLabel = label
-                maxPerc = num/numTweets
+                maxPerc = num/self.numTweets
         
 
         return maxLabel, maxPerc
