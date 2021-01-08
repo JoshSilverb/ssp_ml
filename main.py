@@ -16,7 +16,7 @@ class Driver:
     # end
 
     def classify(self, ticker):
-        numTweets = 50
+        numTweets = self.numTweets
         tweets = self.tweetScraper.get_ticker_tweets(ticker, self.daysBack, self.numTweets)
         predictions = {"bearish" : 0, "bullish" : 0, "neutral" : 0}
 
