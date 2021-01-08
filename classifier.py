@@ -61,10 +61,6 @@ class Classifier:
         print(len(self.featureList), "unique features")
         print(len(self.trainSet), "training tweets")
 
-        # use pickle to store data
-        pickle.dump(self.featureList, open("data/pickles/featureList.pickle", "wb"))
-        pickle.dump(self.featureSets, open("data/pickles/featureSets.pickle", "wb"))        
-
         return self.trainSet
     # end
 
