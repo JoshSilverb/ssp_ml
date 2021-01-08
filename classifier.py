@@ -5,7 +5,6 @@ from sklearn.preprocessing import StandardScaler
 from nltk.classify.scikitlearn import SklearnClassifier
 from os.path import exists
 import pickle
-import tqdm
 from sklearn.metrics import confusion_matrix
 
 class Classifier:
@@ -49,7 +48,7 @@ class Classifier:
         
         f = FeatureExtractor()
         counter = 0
-        for tweet, label in tqdm.tqdm(self.data.items()):
+        for tweet, label in self.data.items():
             featureVector = f.get_feature_vector(tweet)
             if len(featureVector) > 0:
                 self.featureSets.append((featureVector, label))         # dictionary of [bigrams in a tweet] : sentiment of that tweet

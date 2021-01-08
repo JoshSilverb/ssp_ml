@@ -1,6 +1,6 @@
 # Stock Sentiment Prediction (SSP)
 
-Analyze sentiment (bearish/bullish) of tweets with given $ticker
+Analyze sentiment (bearish/bullish/neutral) of tweets containing a given ticker
 
 
 ## Setup tutorial
@@ -16,3 +16,5 @@ To run with additional configuration, run ```python main.py -t [True/False] -n [
 - ```-t``` selects whether to retrain the model using data in ```./data/train/```
 - ```-n``` defines the number of tweets to analyze
 - ```-d``` defines the maximum number of days before today to search through
+
+
