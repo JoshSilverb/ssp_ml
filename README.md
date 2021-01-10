@@ -1,6 +1,6 @@
 # Stock Sentiment Prediction (SSP)
 
-Analyze sentiment (bearish/bullish/neutral) of tweets containing a given ticker
+Analyze sentiment (bearish/bullish/neutral) of tweets containing a given ticker using a linear SVM model or convolutional neural network
 
 
 ## Setup tutorial
