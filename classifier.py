@@ -17,8 +17,8 @@ class Classifier:
         self.featureSets = []
         self.trainDir = trainDirectory
 
-        if not trainNew and exists("./data/pickles/model.pickle"):
-            self.model = pickle.load(open('./data/pickles/model.pickle','rb'))
+        if not trainNew and exists("./data/models/svm.pickle"):
+            self.model = pickle.load(open('./data/models/svm.pickle','rb'))
             
         else:
             print("Training model")
@@ -71,7 +71,7 @@ class Classifier:
         
         self.model.train(self.trainSet)
 
-        pickle.dump(self.model, open("data/pickles/model.pickle", "wb"))
+        pickle.dump(self.model, open("data/models/svm.pickle", "wb"))
 
         return self.model
     # end
