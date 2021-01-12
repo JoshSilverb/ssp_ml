@@ -12,7 +12,8 @@ Analyze sentiment (bearish/bullish/neutral) of tweets containing a given ticker 
 
 ### Running
 To run the basic version, simply run ```python main.py``` and enter a ticker when prompted
-To run with additional configuration, run ```python main.py -t [True/False] -n [Integer] -d [Integer]```, where 
+To run with additional configuration, run ```python main.py -m [svm/cnn] -t [True/False] -n [Integer] -d [Integer]```, where 
+- ```-m``` selects the type of model to use for classification (SVM or CNN)
 - ```-t``` selects whether to retrain the model using data in ```./data/train/```
 - ```-n``` defines the number of tweets to analyze
 - ```-d``` defines the maximum number of days before today to search through
