@@ -1,5 +1,6 @@
 from classifier import Classifier
 from tweet_fetch import GetTweets
+from cnn_classifier import ConvClassifier
 
 import sys
 import os
@@ -7,10 +8,13 @@ import tqdm
 import argparse
 
 class Driver:
-    def __init__(self, api_key, api_secret, acc_tok, acc_secret, trainNew, daysBack_, numTweets_):
+    def __init__(self, classifier_, api_key, api_secret, acc_tok, acc_secret, trainNew, daysBack_, numTweets_):
         trainDir = "./data/train/"
         self.tweetScraper = GetTweets(api_key, api_secret, acc_tok, acc_secret)
-        self.classifier = Classifier(trainNew, trainDir)
+        if classifier_.lower() == "svm":
+            self.classifier = Classifier(trainNew, trainDir)
+        elif classifier_.lower() == "cnn":
+            self.classifier = ConvClassifier(trainNew, trainDir)
         self.daysBack = daysBack_
         self.numTweets = numTweets_
     # end
@@ -40,6 +44,11 @@ class Driver:
             
 def parse_args():
     parser: argparse.ArgumentParser = argparse.ArgumentParser()
+    parser.add_argument('-m',
+                        action='store', dest='model',
+                        type=str,
+                        required=True,
+                        help='select type of model to use [svm/cnn]')
     parser.add_argument('-t',
                         action='store', dest='train',
                         type=str,
@@ -86,10 +95,10 @@ if __name__ == "__main__":
             raise argparse.ArgumentTypeError('Boolean value expected.')
 
         
-        driver = Driver(API_key, API_secret, access_token, access_secret, train, config.daysBack, config.num)
+        driver = Driver(config.model, API_key, API_secret, access_token, access_secret, train, config.daysBack, config.num)
     else:
         # default setup
-        driver = Driver(API_key, API_secret, access_token, access_secret, False, 2, 50)
+        driver = Driver("cnn", API_key, API_secret, access_token, access_secret, False, 2, 50)
     
     col, l = os.get_terminal_size()
     print('='*col)
