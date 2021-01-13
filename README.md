@@ -1,4 +1,4 @@
-# Stock Sentiment Prediction (SSP)
+# Stock Sentiment Prediction with Machine Learning (SSP_ML)
 
 Analyze sentiment (bearish/bullish/neutral) of tweets containing a given ticker using a linear SVM model or convolutional neural network
 
