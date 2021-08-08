@@ -1,5 +1,5 @@
 from sklearn.svm import LinearSVC
-from feature_extract import FeatureExtractor
+from utils.feature_extract import FeatureExtractor
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from nltk.classify.scikitlearn import SklearnClassifier
@@ -7,31 +7,14 @@ from os.path import exists
 import pickle
 from sklearn.metrics import confusion_matrix
 
-class Classifier:
-    def __init__(self, trainNew, trainDirectory):
-        self.data = {}
-        self.labels = ["bearish", "bullish", "neutral"]
-        self.trainSet = []
-        self.testSet = []
-        self.featureList = []
-        self.featureSets = []
-        self.trainDir = trainDirectory
-
-        if not trainNew and exists("./data/models/svm.pickle"):
-            self.model = pickle.load(open('./data/models/svm.pickle','rb'))
-            
-        else:
-            print("Training model")
-            self.model = SklearnClassifier(LinearSVC(random_state=0, tol=1e-5))
-            self.load_data()
-            self.extract_features()
-            self.train_model()
-
+class SvcClassifier:
+    def __init__(self):
+        pass
     # end
 
         
 
-    def load_data(self):
+    def __load_data(self):
         
         self.data = {}
         for label in self.labels:
@@ -42,9 +25,9 @@ class Classifier:
     # end
 
 
-    def extract_features(self):
+    def __extract_features(self):
         if(len(self.data) == 0):
-            self.load_data()
+            self.__load_data()
         
         f = FeatureExtractor()
         counter = 0
@@ -67,14 +50,16 @@ class Classifier:
     def train_model(self):
 
         if(len(self.trainSet) == 0):
-            self.extract_features()
-        
+            self.__extract_features()
+
+        self.model = SklearnClassifier(LinearSVC(random_state=0, tol=1e-5))
         self.model.train(self.trainSet)
 
         pickle.dump(self.model, open("data/models/svm.pickle", "wb"))
 
         return self.model
     # end
+
 
     def classify(self, tweetText):
         f = FeatureExtractor()
